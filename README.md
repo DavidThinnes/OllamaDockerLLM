@@ -13,11 +13,11 @@ docker compose up -d
 
 ================================================
 
-docker exec -it ollama\_docker-ollama-1 ollama run llama3.1:latest
+docker exec -it ollama_docker-ollama-1 ollama run llama3.1:latest
 
-docker exec -it ollama\_docker-ollama-1 ollama run meditron
+docker exec -it ollama_docker-ollama-1 ollama run meditron
 
-docker exec -it ollama\_docker-ollama-1 ollama run meditron:70b   (that's the big one ~40Gb)
+docker exec -it ollama_docker-ollama-1 ollama run meditron:70b   (that's the big one ~40Gb)
 
 
 
@@ -37,7 +37,7 @@ docker logs ollama
 
 =============================================
 
-docker exec -it ollama\_docker-ollama-1 ollama rm medllama2:latest
+docker exec -it ollama_docker-ollama-1 ollama rm medllama2:latest
 
 
 
@@ -61,15 +61,15 @@ docker rm ollama
 
 
 
-&nbsp;(Invoke-WebRequest -method POST -Body '{"model":"meditron", "prompt":"What is an EEG?", "stream": false}' -uri http://localhost:11434/api/generate ).Content | ConvertFrom-json
+(Invoke-WebRequest -method POST -Body '{"model":"meditron", "prompt":"What is an EEG?", "stream": false}' -uri http://localhost:11434/api/generate ).Content | ConvertFrom-json
 
 
 
-&nbsp;(Invoke-WebRequest -method POST -Body '{"model":"llama3.1:latest", "prompt":"What is an EEG?", "stream": false}' -uri http://localhost:11434/api/generate ).Content | ConvertFrom-json
+(Invoke-WebRequest -method POST -Body '{"model":"llama3.1:latest", "prompt":"What is an EEG?", "stream": false}' -uri http://localhost:11434/api/generate ).Content | ConvertFrom-json
 
 
 
-&nbsp;(Invoke-WebRequest -method POST -Body '{"model":"meditron:70b", "prompt":"What is an EEG?", "stream": false}' -uri http://localhost:11434/api/generate ).Content | ConvertFrom-json
+(Invoke-WebRequest -method POST -Body '{"model":"meditron:70b", "prompt":"What is an EEG?", "stream": false}' -uri http://localhost:11434/api/generate ).Content | ConvertFrom-json
 
 
 
@@ -121,11 +121,11 @@ create modefile and copy it to the same path
 
 Inside the container run:
 
-docker exec -it ollama\_docker-ollama-1 ollama create  MyModelname -f models/Modelfile
+docker exec -it ollama_docker-ollama-1 ollama create  MyModelname -f models/Modelfile
 
 
 
-docker exec -it ollama\_docker-ollama-1 ollama run MyModelname
+docker exec -it ollama_docker-ollama-1 ollama run MyModelname
 
 
 
