@@ -1,147 +1,75 @@
 # OllamaDockerLLM
-An easy way to run Ollama LLM () models inside a docker container.Open Web UI can be used to create a chat interface.
+An easy way to run [Ollama LLM](https://ollama.ai) models inside a Docker container. Optionally, you can use **Open WebUI** to create a chat interface.
 
-**start ollama**
+---
 
-==============================================
-
+## 🚀 Start Ollama
+```bash
 docker compose up -d
+```
+---
 
-
-
-**select and run model (pull with cloudflare(vpn))**
-
-================================================
-
+## 🤖 Select and Run a Model
+*(pulling may require Cloudflare VPN)*
+```bash
 docker exec -it ollama_docker-ollama-1 ollama run llama3.1:latest
-
 docker exec -it ollama_docker-ollama-1 ollama run meditron
-
-docker exec -it ollama_docker-ollama-1 ollama run meditron:70b   (that's the big one ~40Gb)
-
-
-
-(or whichever model you want)
+docker exec -it ollama_docker-ollama-1 ollama run meditron:70b   # ~40GB model
+```
+Or whichever model you want.
 
 
 
-**show the logs**
 
-==============================================
-
+## 📜 Show Logs
 docker logs ollama
 
 
 
-**stop and remove models**
-
-=============================================
-
+## 🗑 Stop and Remove a Model
+```bash
 docker exec -it ollama_docker-ollama-1 ollama rm medllama2:latest
+```
 
 
-
-
-
-**stop and remove ollama**
-
-==============================
-
+## 🛑 Stop and Remove Ollama
 docker stop ollama
-
 docker rm ollama
 
 
 
+## 🌐 Access via Network
+Change `localhost` to your server’s IP if accessing remotely.
+```bash
+(Invoke-WebRequest -Method POST -Body '{"model":"meditron", "prompt":"What is an EEG?", "stream": false}' -Uri http://localhost:11434/api/generate).Content | ConvertFrom-Json
+(Invoke-WebRequest -Method POST -Body '{"model":"llama3.1:latest", "prompt":"What is an EEG?", "stream": false}' -Uri http://localhost:11434/api/generate).Content | ConvertFrom-Json
+(Invoke-WebRequest -Method POST -Body '{"model":"meditron:70b", "prompt":"What is an EEG?", "stream": false}' -Uri http://localhost:11434/api/generate).Content | ConvertFrom-Json
+```
 
 
-**access from same network should be possible**
-
-=============================================== 
-
-
-
-(Invoke-WebRequest -method POST -Body '{"model":"meditron", "prompt":"What is an EEG?", "stream": false}' -uri http://localhost:11434/api/generate ).Content | ConvertFrom-json
-
-
-
-(Invoke-WebRequest -method POST -Body '{"model":"llama3.1:latest", "prompt":"What is an EEG?", "stream": false}' -uri http://localhost:11434/api/generate ).Content | ConvertFrom-json
-
-
-
-(Invoke-WebRequest -method POST -Body '{"model":"meditron:70b", "prompt":"What is an EEG?", "stream": false}' -uri http://localhost:11434/api/generate ).Content | ConvertFrom-json
+## 💻 Start Open WebUI
+If you want the web interface, add `open-webui` and its dependencies to your `docker-compose.yml` file and run:
+docker compose up -d
 
 
 
-change IP address to the one of your Server
-
-
-
-
-
-**start open webui if needed**
-
-============================================
-
-
-
-if not, command webui and dependencies in the docker-compose yml file
-
-
-
-
-
-
-
-
-
-**check nvidia gpu usage**
-
-=============================================
-
+## 📊 Check NVIDIA GPU Usage
 nvidia-smi
-
 nvidia-smi -l 1
 
 
 
-
-
-
-
-**Use a modelfile**
-
-===============================================
-
-.copy the sha into .ollama/models/blobs
-
-create modefile and copy it to the same path
-
-
-
-Inside the container run:
-
-docker exec -it ollama_docker-ollama-1 ollama create  MyModelname -f models/Modelfile
-
-
-
+## 📝 Use a Modelfile
+1. Copy the model SHA into `.ollama/models/blobs`  
+2. Create your `Modelfile` and place it in the same path  
+3. Inside the container, run:
+```bash
+docker exec -it ollama_docker-ollama-1 ollama create MyModelname -f models/Modelfile
 docker exec -it ollama_docker-ollama-1 ollama run MyModelname
+```
 
 
-
-
-
-
-
-
-
-**Stop and remove all docker containers**
-
-==================================================
-
-docker stop $(docker ps -a) && docker rm $(docker ps -aq)
-
-
-
-
-
+## 🧹 Stop and Remove **All** Docker Containers
+```bash
+docker stop $(docker ps -q) || true && docker rm $(docker ps -aq) || true
+```
