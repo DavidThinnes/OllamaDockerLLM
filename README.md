@@ -59,18 +59,17 @@ nvidia-smi -l 1
 
 
 ## 📝 Use a Modelfile
-1. Copy the model SHA into `.ollama/models/blobs`  
-2. Create your `Modelfile` 
+1. Create your `Modelfile` 
 
-3. copy your own modelfile to the volume as here
+2. copy your own modelfile to the volume as here
 ```bash
 docker cp "C:\Users\DigitalScrubsPC\repos\OllamaDockerLLM\Modelfile" ollama_docker-ollama-1:/root/.ollama/models/
 ```
-4. varify inside the container
+3. varify inside the container
 ```bash
 docker exec -it ollama_docker-ollama-1 ls /root/.ollama/models
 ```
-5. Inside the container, run:
+4. Inside the container, run:
 ```bash
 docker exec -it ollama_docker-ollama-1 ollama create MyModelname -f /root/.ollama/models/Modelfile
 
