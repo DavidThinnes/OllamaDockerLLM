@@ -13,8 +13,7 @@ docker compose up -d
 *(pulling may require Cloudflare VPN)*
 ```bash
 docker exec -it ollama_docker-ollama-1 ollama run llama3.1:latest
-docker exec -it ollama_docker-ollama-1 ollama run meditron
-docker exec -it ollama_docker-ollama-1 ollama run meditron:70b   # ~40GB model
+docker exec -it ollama_docker-ollama-1 ollama run medllama2:latest
 ```
 Or whichever model you want.
 
@@ -39,9 +38,7 @@ docker rm ollama
 ## 🌐 Access via Network
 Change `localhost` to your server’s IP if accessing remotely.
 ```bash
-(Invoke-WebRequest -Method POST -Body '{"model":"meditron", "prompt":"What is an EEG?", "stream": false}' -Uri http://localhost:11434/api/generate).Content | ConvertFrom-Json
 (Invoke-WebRequest -Method POST -Body '{"model":"llama3.1:latest", "prompt":"What is an EEG?", "stream": false}' -Uri http://localhost:11434/api/generate).Content | ConvertFrom-Json
-(Invoke-WebRequest -Method POST -Body '{"model":"meditron:70b", "prompt":"What is an EEG?", "stream": false}' -Uri http://localhost:11434/api/generate).Content | ConvertFrom-Json
 ```
 
 
@@ -75,6 +72,7 @@ docker exec -it ollama_docker-ollama-1 ollama create MyModelname -f /root/.ollam
 
 docker exec -it ollama_docker-ollama-1 ollama run MyModelname
 ```
+PARAMETER temperature: should be set to 0.0 for control signals (e.g. robot control)
 
 
 ## 🗑 Stop and Remove a Model
