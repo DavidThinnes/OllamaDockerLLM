@@ -139,7 +139,7 @@ docker exec -it ollama\_docker-ollama-1 ollama run MyModelname
 
 ==================================================
 
-docker stop $(docker ps -a) \&\& docker rm $(docker ps -aq)
+docker stop $(docker ps -a) && docker rm $(docker ps -aq)
 
 
 
