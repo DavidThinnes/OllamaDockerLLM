@@ -43,7 +43,7 @@ Change `localhost` to your server’s IP if accessing remotely.
 
 
 ## 💻 Start Open WebUI
-If you don't want the web interface, comment `open-webui` and its dependencies to your `compose.yml` file and run
+If you don't want the web interface, comment `open-webui` and its dependencies in the `compose.yml` file and run
 
 
 
