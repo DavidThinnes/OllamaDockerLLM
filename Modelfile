@@ -1,5 +1,5 @@
 # Define the base model to use
-FROM llama2
+FROM llama3
 
 # Set system behavior and restrictions
 SYSTEM """
@@ -12,13 +12,9 @@ You are a safe and restricted assistant. Follow these rules:
 
 # Set model parameters
 PARAMETER temperature 0.3
-PARAMETER max_tokens 500
 
 # Define the full prompt template
-TEMPLATE """
-{{.SYSTEM}}
+TEMPLATE """{{ if .System }}System: {{ .System }}{{ end }}
+User: {{ .Prompt }}
+Assistant: {{ .Response }}"""        
 
-User: {{.User}}
-
-Assistant:
-"""

@@ -28,12 +28,6 @@ docker logs ollama
 
 
 
-## 🗑 Stop and Remove a Model
-```bash
-docker exec -it ollama_docker-ollama-1 ollama rm medllama2:latest
-```
-
-
 ## 🛑 Stop and Remove Ollama
 ```bash
 docker stop ollama
@@ -66,13 +60,28 @@ nvidia-smi -l 1
 
 ## 📝 Use a Modelfile
 1. Copy the model SHA into `.ollama/models/blobs`  
-2. Create your `Modelfile` and place it in the same path  
-3. Inside the container, run:
+2. Create your `Modelfile` 
+
+3. copy your own modelfile to the volume as here
 ```bash
-docker exec -it ollama_docker-ollama-1 ollama create MyModelname -f models/Modelfile
+docker cp "C:\Users\DigitalScrubsPC\repos\OllamaDockerLLM\Modelfile" ollama_docker-ollama-1:/root/.ollama/models/
+```
+4. varify inside the container
+```bash
+docker exec -it ollama_docker-ollama-1 ls /root/.ollama/models
+```
+5. Inside the container, run:
+```bash
+docker exec -it ollama_docker-ollama-1 ollama create MyModelname -f /root/.ollama/models/Modelfile
+
 docker exec -it ollama_docker-ollama-1 ollama run MyModelname
 ```
 
+
+## 🗑 Stop and Remove a Model
+```bash
+docker exec -it ollama_docker-ollama-1 ollama rm medllama2:latest
+```
 
 ## 🧹 Stop and Remove **All** Docker Containers
 ```bash
