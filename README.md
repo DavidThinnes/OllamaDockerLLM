@@ -22,7 +22,9 @@ Or whichever model you want.
 
 
 ## 📜 Show Logs
+```bash
 docker logs ollama
+```
 
 
 
@@ -33,8 +35,10 @@ docker exec -it ollama_docker-ollama-1 ollama rm medllama2:latest
 
 
 ## 🛑 Stop and Remove Ollama
+```bash
 docker stop ollama
 docker rm ollama
+```
 
 
 
@@ -48,14 +52,15 @@ Change `localhost` to your server’s IP if accessing remotely.
 
 
 ## 💻 Start Open WebUI
-If you want the web interface, add `open-webui` and its dependencies to your `docker-compose.yml` file and run:
-docker compose up -d
+If you don't want the web interface, comment `open-webui` and its dependencies to your `compose.yml` file and run
 
 
 
 ## 📊 Check NVIDIA GPU Usage
+```bash
 nvidia-smi
 nvidia-smi -l 1
+```
 
 
 
